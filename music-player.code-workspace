@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "music-player",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "music-player"
+	}
+}
