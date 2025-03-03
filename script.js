@@ -13,7 +13,7 @@ const playBtn = document.getElementById('play')
 const nextBtn = document.getElementById('next')
 
 
-
+let startTime = 0.00
 let isPlaying = false
 
 function playSong() {
@@ -39,6 +39,8 @@ function loadSong(song) {
     artist.textContent = song.artist
     music.src = `music/${song.name}.mp3`
     image.src = `img/${song.album}.jpg`
+    durationEl.textContent = song.duration
+    currentTimeEl.textContent = '0:00'
 }
 
 let songIndex = 0
