@@ -12,9 +12,17 @@ const prevBtn = document.getElementById('prev')
 const playBtn = document.getElementById('play')
 const nextBtn = document.getElementById('next')
 
-
-let startTime = 0.00
 let isPlaying = false
+let songIndex = 0
+
+playBtn.addEventListener('click', () => {
+    (isPlaying ? pauseSong() : playSong())
+})
+prevBtn.addEventListener('click', prevSong)
+nextBtn.addEventListener('click', nextSong)
+music.addEventListener('ended', nextSong)
+music.addEventListener('timeupdate', updateProgressBar)
+progressContainer.addEventListener('click', setProgressBar)
 
 function playSong() {
     isPlaying = true
@@ -30,10 +38,6 @@ function pauseSong() {
     music.pause()
 }
 
-playBtn.addEventListener('click', () => {
-    (isPlaying ? pauseSong() : playSong())
-})
-
 function loadSong(song) {
     title.textContent = `${song.displayName}`
     artist.textContent = song.artist
@@ -43,8 +47,6 @@ function loadSong(song) {
     currentTimeEl.textContent = '0:00'
 }
 
-let songIndex = 0
-
 function prevSong() {
     songIndex--
     if(songIndex < 0) {
@@ -53,6 +55,7 @@ function prevSong() {
     loadSong(songs[songIndex])
     playSong()
 }
+
 function nextSong() {
     songIndex++
     if(songIndex > songs.length - 1) {
@@ -61,8 +64,6 @@ function nextSong() {
     loadSong(songs[songIndex])
     playSong()
 }
-
-loadSong(songs[songIndex])
 
 function updateProgressBar(e) {
     if(isPlaying) {
@@ -93,8 +94,5 @@ function setProgressBar(e) {
     music.currentTime = (clickX / width) * duration
 }
 
-prevBtn.addEventListener('click', prevSong)
-nextBtn.addEventListener('click', nextSong)
-music.addEventListener('ended', nextSong)
-music.addEventListener('timeupdate', updateProgressBar)
-progressContainer.addEventListener('click', setProgressBar)
+loadSong(songs[songIndex])
+
